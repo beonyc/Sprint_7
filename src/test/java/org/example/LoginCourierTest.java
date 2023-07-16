@@ -3,14 +3,10 @@ package org.example;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.response.Response;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static org.example.CourierField.CourierMethods.*;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertEquals;
 
 public class LoginCourierTest {
     public String RESPONSE_404_NOT_FOUND = "Учетная запись не найдена";

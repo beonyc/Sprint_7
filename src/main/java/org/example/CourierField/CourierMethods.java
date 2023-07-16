@@ -1,14 +1,11 @@
 package org.example.CourierField;
 
-import groovy.xml.StreamingDOMBuilder;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import static io.restassured.RestAssured.*;
 import static org.example.settings.Config.*;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
 
 public class CourierMethods {
     private static final String LOGIN = RandomStringUtils.randomAlphanumeric(10);

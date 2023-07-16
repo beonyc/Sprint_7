@@ -1,10 +1,8 @@
 package org.example.OrderField;
 
-import groovy.xml.StreamingDOMBuilder;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static org.example.settings.Config.*;

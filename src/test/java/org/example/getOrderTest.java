@@ -1,16 +1,12 @@
 package org.example;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
 import static org.example.OrderField.OrderMethods.*;
-import static org.example.settings.Config.MAIN_URL;
-import static org.example.settings.Config.ORDER_BY_TRACK_END_POINT;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
