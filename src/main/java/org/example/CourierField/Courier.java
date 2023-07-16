@@ -4,6 +4,7 @@ public class Courier {
     private String login;
     private String password;
     private String firstName;
+    private Courier courier;
 
     public String getLogin() {
         return login;
@@ -41,12 +42,12 @@ public class Courier {
     public Courier() {
     }
     public Courier getCourierWithoutLogin(String password){
-        Courier courier=new Courier();
+        courier=new Courier();
         courier.setPassword(password);
         return courier;
     }
     public Courier getCourierWithoutPassword(String login){
-        Courier courier=new Courier();
+        courier=new Courier();
         courier.setLogin(login);
         return courier;
     }

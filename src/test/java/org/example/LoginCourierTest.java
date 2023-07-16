@@ -1,25 +1,28 @@
 package org.example;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static org.example.CourierField.CourierMethods.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertEquals;
 
 public class LoginCourierTest {
     public String RESPONSE_404_NOT_FOUND = "Учетная запись не найдена";
     public String RESPONSE_400_BAD_REQUEST = "Недостаточно данных для входа";
+    int id;
 
     @Test
     @DisplayName("Авторизация курьера в системе")
     @Description("Курьер успешно логинится в системе, ожидается ответ 200 OK и id не пустое")
     public void loginCourierTest() {
-        login()
-                .then().body("id", notNullValue())
-                .and().statusCode(200);
+        id =login();
+        clearData(id);
     }
 
     @Test
@@ -39,5 +42,13 @@ public class LoginCourierTest {
                 .then().body("message", equalTo(RESPONSE_400_BAD_REQUEST))
                 .and().statusCode(400);
     }
+
+    @Step("Очистка базы данных, удаление курьера")
+    public void clearData(int id) {
+        deleteCourier(id).then()
+                .statusCode(200)
+                .and().body("ok", equalTo(true));
+    }
+
 
 }

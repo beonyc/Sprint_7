@@ -1,11 +1,14 @@
 package org.example.CourierField;
 
+import groovy.xml.StreamingDOMBuilder;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import static io.restassured.RestAssured.*;
 import static org.example.settings.Config.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class CourierMethods {
     private static final String LOGIN = RandomStringUtils.randomAlphanumeric(10);
@@ -35,7 +38,7 @@ public class CourierMethods {
 
     @Step("Создание нового курьера без LOGIN")
     public static Response createCourierWithoutLogin() {
-        Courier courier=new Courier();
+        Courier courier = new Courier();
         return given()
                 .header("Content-type", "application/json")
                 .baseUri(MAIN_URL)
@@ -45,7 +48,7 @@ public class CourierMethods {
 
     @Step("Создание нового курьера без PASSWORD")
     public static Response createCourierWithoutPassword() {
-        Courier courier=new Courier();
+        Courier courier = new Courier();
         return given()
                 .header("Content-type", "application/json")
                 .baseUri(MAIN_URL)
@@ -64,18 +67,19 @@ public class CourierMethods {
     }
 
     @Step("курьер логинится в систему")
-    public static Response login() {
+    public static int login() {
         createNewCourier();
-        return given()
+        Response response = given()
                 .header("Content-type", "application/json")
                 .baseUri(MAIN_URL)
                 .body(CourierData_Login_Password)
                 .post(COURIER_LOGIN_END_POINT);
+        response.then().statusCode(200);
+        return response.then().extract().path("id");
     }
 
     @Step("курьер логинится в систему без валидного логина")
     public static Response loginWithoutValidLoginField() {
-        createNewCourier();
         return given()
                 .header("Content-type", "application/json")
                 .baseUri(MAIN_URL)
@@ -85,13 +89,34 @@ public class CourierMethods {
 
     @Step("курьер логинится в систему без логина ")
     public static Response authWithoutLogin() {
-        createNewCourier();
-        Courier courier=new Courier();
+        Courier courier = new Courier();
         return given()
                 .header("Content-type", "application/json")
                 .baseUri(MAIN_URL)
                 .body(courier.getCourierWithoutLogin(PASSWORD))
                 .post(COURIER_LOGIN_END_POINT);
+    }
+
+    @Step("Удаление курьера ")
+    public static Response deleteCourier(int id) {
+        return given()
+                .baseUri(MAIN_URL)
+                .pathParam("id", id)
+                .delete(COURIER_ID_END_POINT);
+    }
+
+    @Step("Удаление курьера с несуществующим id")
+    public static Response deleteCourierWithIncorrectId() {
+        return given()
+                .baseUri(MAIN_URL)
+                .pathParam("id", Integer.MAX_VALUE)
+                .delete(COURIER_ID_END_POINT);
+    }
+    @Step("Удаление курьера без id")
+    public static Response deleteCourierWithoutId(){
+        return given()
+                .baseUri(MAIN_URL)
+                .delete("courier/");
     }
 
 

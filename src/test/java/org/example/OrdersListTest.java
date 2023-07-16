@@ -5,16 +5,14 @@ import org.junit.Test;
 
 import static org.hamcrest.Matchers.notNullValue;
 import static org.example.OrderField.OrderMethods.*;
-public class OrdersList {
+public class OrdersListTest {
     @Test
     @DisplayName("Получение списка заказов")
     @Description("Получение всего спика заказов. Ожидаем код 200 OK")
     public void getOrdersListTest(){
-
         getOrderList()
                 .then()
                 .statusCode(200);
-
 
     }
 
