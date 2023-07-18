@@ -1,4 +1,4 @@
-package org.example.CourierField;
+package org.example.courier_field;
 
 public class Courier {
     private String login;

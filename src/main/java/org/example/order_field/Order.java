@@ -1,4 +1,4 @@
-package org.example.OrderField;
+package org.example.order_field;
 
 
 public class Order {
