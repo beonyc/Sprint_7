@@ -20,7 +20,7 @@ public class JenkinsNewTests {
     @DisplayName("jenkinsTest")
     @Description("failed test!")
     public void someFailedTest() {
-        int sum = 10;
-        assertEquals(5 + 15, sum);
+        int sum = 11;
+        assertEquals(5 + 6, sum);
     }
 }
