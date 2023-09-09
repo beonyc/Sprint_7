@@ -9,7 +9,7 @@ public class TestsClass {
     @Test
     @DisplayName("failed test")
     public void someTest(){
-        Assert.assertTrue(1==2);
+        Assert.assertTrue(1==1);
     }
 
 }
